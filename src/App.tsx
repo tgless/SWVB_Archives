@@ -639,12 +639,12 @@ export default function App() {
     if (itemPlayerQuery.trim().length < 3) return [];
 
     return players
-      .filter((player) =>
+      .filter((player: any) =>
         (player.full_name || "")
           .toLowerCase()
           .includes(itemPlayerQuery.toLowerCase())
       )
-      .map((player) => player.full_name)
+      .map((player: any) => player.full_name)
       .filter((name) => !form.players.includes(name))
       .slice(0, 10);
   }, [players, itemPlayerQuery, form.players]);
@@ -659,12 +659,12 @@ export default function App() {
     if (editItemPlayerQuery.trim().length < 3) return [];
 
     return players
-      .filter((player) =>
+      .filter((player: any) =>
         (player.full_name || "")
           .toLowerCase()
           .includes(editItemPlayerQuery.toLowerCase())
       )
-      .map((player) => player.full_name)
+      .map((player: any) => player.full_name)
       .filter((name) => !editForm.players.includes(name))
       .slice(0, 10);
   }, [players, editItemPlayerQuery, editForm.players]);
@@ -771,7 +771,7 @@ export default function App() {
     const matchedNames = matchingSeasonRows
       .map((seasonRow) => {
         const matchedPlayer = players.find(
-          (player) =>
+          (player: any) =>
             player.external_player_key === seasonRow.external_player_key
         );
 
@@ -779,7 +779,7 @@ export default function App() {
       })
       .filter(Boolean);
 
-    return [...new Set(matchedNames)];
+    return Array.from(new Set(matchedNames));
   }
 
   async function handleUpload() {
@@ -871,11 +871,13 @@ export default function App() {
       const matchesPlayer = selectedPlayer
         ? (Array.isArray(item.players) &&
             item.players.some(
-              (player) => player.toLowerCase() === selectedPlayer.toLowerCase()
+              (player: string) =>
+                player.toLowerCase() === selectedPlayer.toLowerCase()
             )) ||
           (Array.isArray(item.team_players) &&
             item.team_players.some(
-              (player) => player.toLowerCase() === selectedPlayer.toLowerCase()
+              (player: string) =>
+                player.toLowerCase() === selectedPlayer.toLowerCase()
             ))
         : true;
 
@@ -928,12 +930,12 @@ export default function App() {
     if (playerQuery.trim().length < 3) return [];
 
     return players
-      .filter((player) =>
+      .filter((player: any) =>
         (player.full_name || "")
           .toLowerCase()
           .includes(playerQuery.toLowerCase())
       )
-      .map((player) => player.full_name)
+      .map((player: any) => player.full_name)
       .slice(0, 15);
   }, [players, playerQuery]);
 
@@ -941,7 +943,7 @@ export default function App() {
     if (!selectedPlayer) return [];
 
     const matchingPlayer = players.find(
-      (player) =>
+      (player: any) =>
         player.full_name.toLowerCase() === selectedPlayer.toLowerCase()
     );
 
@@ -966,7 +968,7 @@ export default function App() {
 
     return (
       players.find(
-        (player) =>
+        (player: any) =>
           (player.full_name || "").toLowerCase() ===
           selectedPlayer.toLowerCase()
       ) || null
@@ -1110,13 +1112,15 @@ export default function App() {
       const directPlayerMatch =
         Array.isArray(item.players) &&
         item.players.some(
-          (player) => player.toLowerCase() === selectedPlayer.toLowerCase()
+          (player: string) =>
+            player.toLowerCase() === selectedPlayer.toLowerCase()
         );
 
       const teamPlayerMatch =
         Array.isArray(item.team_players) &&
         item.team_players.some(
-          (player) => player.toLowerCase() === selectedPlayer.toLowerCase()
+          (player: string) =>
+            player.toLowerCase() === selectedPlayer.toLowerCase()
         );
 
       return directPlayerMatch || teamPlayerMatch;
@@ -1124,7 +1128,7 @@ export default function App() {
   }, [items, selectedPlayer]);
 
   const selectedPlayerItemYears = useMemo(() => {
-    return [...new Set(playerItems.map((item) => String(item.year)))];
+    return Array.from(new Set(playerItems.map((item) => String(item.year))));
   }, [playerItems]);
 
   return (
@@ -1833,7 +1837,7 @@ export default function App() {
                   <div
                     style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
                   >
-                    {filteredAthletes.map((player) => (
+                    {filteredAthletes.map((player: string) => (
                       <button
                         key={player}
                         style={styles.secondaryButton}
