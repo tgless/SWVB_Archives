@@ -486,42 +486,42 @@ function ItemCard({
           {item.title}
         </h3>
         <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Year:</strong> {item.year}
+          <strong>Year:</strong> <span style={{ fontWeight: 400 }}>{item.year}</span>
         </p>
         {item.team_year && (
           <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Team Year:</strong> {item.team_year}
+            <strong>Team Year:</strong> <span style={{ fontWeight: 400 }}>{item.team_year}</span>
           </p>
         )}
         <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Type:</strong> {item.category}
+          <strong>Type:</strong> <span style={{ fontWeight: 400 }}>{item.category}</span>
         </p>
         <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Size:</strong> {item.size || "—"}
+          <strong>Size:</strong> <span style={{ fontWeight: 400 }}>{item.size || "—"}</span>
         </p>
         <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Stored:</strong> {item.location || "—"}
+          <strong>Stored:</strong> <span style={{ fontWeight: 400 }}>{item.location || "—"}</span>
         </p>
         {item.notes && (
           <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Notes:</strong> {item.notes}
+            <strong>Notes:</strong> <span style={{ fontWeight: 400 }}>{item.notes}</span>
           </p>
         )}
         {item.autographed && (
           <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Autographed:</strong> Yes
+            <strong>Autographed:</strong> <span style={{ fontWeight: 400 }}>Yes</span>
           </p>
         )}
 
         {Array.isArray(item.players) && item.players.length > 0 && (
           <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Players:</strong> {item.players.join(", ")}
+            <strong>Players:</strong> <span style={{ fontWeight: 400 }}>{item.players.join(", ")}</span>
           </p>
         )}
 
         {Array.isArray(item.team_players) && item.team_players.length > 0 && (
           <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Team Roster:</strong> {item.team_players.join(", ")}
+            <strong>Team Roster:</strong> <span style={{ fontWeight: 400 }}>{item.team_players.join(", ")}</span>
           </p>
         )}
 
