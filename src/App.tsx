@@ -64,7 +64,7 @@ const styles: Record<string, React.CSSProperties> = {
     minHeight: "100vh",
     background: "#f2eff0",
     color: "#334155",
-    fontFamily: "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif",
+    fontFamily: "Helvetica, Arial, sans-serif",
     paddingBottom: "92px",
   },
   banner: {
@@ -329,6 +329,11 @@ const styles: Record<string, React.CSSProperties> = {
     gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: "20px",
   },
+  editPanelInsideCard: {
+  marginTop: "18px",
+  paddingTop: "18px",
+  borderTop: "1px solid #dde2e7",
+},
   statsGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
@@ -454,6 +459,9 @@ function ItemCard({
   onEdit: (item: any) => void;
   onDelete: (id: any) => void;
 }) {
+  const detailStyle = { margin: "4px 0", color: "#475569" };
+  const valueStyle = { fontWeight: 400 };
+
   return (
     <>
       <div
@@ -479,49 +487,64 @@ function ItemCard({
         ) : (
           <ImageIcon size={52} color="#94a3b8" />
         )}
-      </>
+      </div>
 
       <div style={styles.cardBody}>
         <h3 style={{ margin: "0 0 8px", fontSize: "22px", color: "#1f2937" }}>
           {item.title}
         </h3>
-        <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Year:</strong> <span style={{ fontWeight: 400 }}>{item.year}</span>
+
+        <p style={detailStyle}>
+          <strong>Year:</strong> <span style={valueStyle}>{item.year}</span>
         </p>
+
         {item.team_year && (
-          <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Team Year:</strong> <span style={{ fontWeight: 400 }}>{item.team_year}</span>
+          <p style={detailStyle}>
+            <strong>Team Year:</strong>{" "}
+            <span style={valueStyle}>{item.team_year}</span>
           </p>
         )}
-        <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Type:</strong> <span style={{ fontWeight: 400 }}>{item.category}</span>
+
+        <p style={detailStyle}>
+          <strong>Type:</strong>{" "}
+          <span style={valueStyle}>{item.category}</span>
         </p>
-        <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Size:</strong> <span style={{ fontWeight: 400 }}>{item.size || "—"}</span>
+
+        <p style={detailStyle}>
+          <strong>Size:</strong>{" "}
+          <span style={valueStyle}>{item.size || "—"}</span>
         </p>
-        <p style={{ margin: "4px 0", color: "#475569" }}>
-          <strong>Stored:</strong> <span style={{ fontWeight: 400 }}>{item.location || "—"}</span>
+
+        <p style={detailStyle}>
+          <strong>Stored:</strong>{" "}
+          <span style={valueStyle}>{item.location || "—"}</span>
         </p>
+
         {item.notes && (
-          <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Notes:</strong> <span style={{ fontWeight: 400 }}>{item.notes}</span>
+          <p style={detailStyle}>
+            <strong>Notes:</strong>{" "}
+            <span style={valueStyle}>{item.notes}</span>
           </p>
         )}
+
         {item.autographed && (
-          <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Autographed:</strong> <span style={{ fontWeight: 400 }}>Yes</span>
+          <p style={detailStyle}>
+            <strong>Autographed:</strong>{" "}
+            <span style={valueStyle}>Yes</span>
           </p>
         )}
 
         {Array.isArray(item.players) && item.players.length > 0 && (
-          <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Players:</strong> <span style={{ fontWeight: 400 }}>{item.players.join(", ")}</span>
+          <p style={detailStyle}>
+            <strong>Players:</strong>{" "}
+            <span style={valueStyle}>{item.players.join(", ")}</span>
           </p>
         )}
 
         {Array.isArray(item.team_players) && item.team_players.length > 0 && (
-          <p style={{ margin: "4px 0", color: "#475569" }}>
-            <strong>Team Roster:</strong> <span style={{ fontWeight: 400 }}>{item.team_players.join(", ")}</span>
+          <p style={detailStyle}>
+            <strong>Team Roster:</strong>{" "}
+            <span style={valueStyle}>{item.team_players.join(", ")}</span>
           </p>
         )}
 
@@ -533,6 +556,7 @@ function ItemCard({
           >
             Edit
           </button>
+
           <button
             type="button"
             style={{
@@ -546,7 +570,7 @@ function ItemCard({
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -1483,11 +1507,7 @@ export default function App() {
               No items found for this selection yet.
             </div>
           ) : (
-          editPanelInsideCard: {
-  marginTop: "18px",
-  paddingTop: "18px",
-  borderTop: "1px solid #dde2e7",
-},
+          
             <div style={styles.itemsGrid}>
               {filteredItems.map((item) => (
                 <React.Fragment key={item.id}>
@@ -2033,15 +2053,16 @@ export default function App() {
             <div style={styles.itemsGrid}>
               {filteredItems.map((item) => (
                 <React.Fragment key={item.id}>
-                  <ItemCard
-                    item={item}
-                    onEdit={startEditItem}
-                    onDelete={handleDeleteItem}
-                  />
+  <div style={styles.card}>
+    <ItemCard
+      item={item}
+      onEdit={startEditItem}
+      onDelete={handleDeleteItem}
+    />
 
-                  {editingItemId === item.id && (
-                    <div style={{ ...styles.card, marginTop: "0" }}>
-                      <div style={styles.cardBody}>
+    {editingItemId === item.id && (
+      <div style={styles.editPanelInsideCard}>
+        <div style={styles.cardBody}>
                         <h3
                           style={{
                             margin: "0 0 18px",
@@ -2331,10 +2352,11 @@ export default function App() {
                             Cancel
                           </button>
                         </div>
-                      </div>
-                    </div>
-                  )}
-                </React.Fragment>
+                             </div>
+      </div>
+    )}
+  </div>
+</React.Fragment>
               ))}
             </div>
           )}
