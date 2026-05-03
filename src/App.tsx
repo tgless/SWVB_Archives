@@ -455,7 +455,7 @@ function ItemCard({
   onDelete: (id: any) => void;
 }) {
   return (
-    <div style={styles.card}>
+    <>
       <div
         style={{
           aspectRatio: "4 / 3",
@@ -479,7 +479,7 @@ function ItemCard({
         ) : (
           <ImageIcon size={52} color="#94a3b8" />
         )}
-      </div>
+      </>
 
       <div style={styles.cardBody}>
         <h3 style={{ margin: "0 0 8px", fontSize: "22px", color: "#1f2937" }}>
@@ -1483,18 +1483,24 @@ export default function App() {
               No items found for this selection yet.
             </div>
           ) : (
+          editPanelInsideCard: {
+  marginTop: "18px",
+  paddingTop: "18px",
+  borderTop: "1px solid #dde2e7",
+},
             <div style={styles.itemsGrid}>
               {filteredItems.map((item) => (
                 <React.Fragment key={item.id}>
-                  <ItemCard
-                    item={item}
-                    onEdit={startEditItem}
-                    onDelete={handleDeleteItem}
-                  />
+  <div style={styles.card}>
+    <ItemCard
+      item={item}
+      onEdit={startEditItem}
+      onDelete={handleDeleteItem}
+    />
 
-                  {editingItemId === item.id && (
-                    <div style={{ ...styles.card, marginTop: "0" }}>
-                      <div style={styles.cardBody}>
+    {editingItemId === item.id && (
+      <div style={styles.editPanelInsideCard}>
+        <div style={styles.cardBody}>
                         <h3
                           style={{
                             margin: "0 0 18px",
@@ -1784,10 +1790,11 @@ export default function App() {
                             Cancel
                           </button>
                         </div>
-                      </div>
-                    </div>
-                  )}
-                </React.Fragment>
+                              </div>
+      </div>
+    )}
+  </div>
+</React.Fragment>
               ))}
             </div>
           )}
