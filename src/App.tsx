@@ -46,6 +46,7 @@ const STORAGE_OPTIONS = [
   "Locker Room AV Closet - Counter/Lower Cabinets",
   "Locker Room AV Closet - Upper Cabinets",
   "Locker Room Lounge",
+  "Locker Room Storage Closet - B4",
   "Locker Room Storage Closet - C1",
   "Locker Room Storage Closet - C2",
   "Locker Room Storage Closet - C3",
